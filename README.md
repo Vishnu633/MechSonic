@@ -23,7 +23,7 @@ A high-fidelity mechanical keyboard sound simulator with a modern, monochrome ae
 
 1.  **Clone the repository**:
     ```bash
-    git clone https://github.com/yourusername/mechsonic.git
+    git clone https://github.com/Vishnu633/MechSonic.git
     cd mechsonic
     ```
 
