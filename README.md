@@ -2,8 +2,9 @@
 
 A high-fidelity mechanical keyboard sound simulator with a modern, monochrome aesthetic. Experience the tactile feedback of premium switches without the hardware.
 
-![Mechsonic UI](https://via.placeholder.com/800x600?text=Mechsonic+UI+Preview) 
-*(Replace with actual screenshot)*
+![Mechsonic UI]
+<img width="498" height="643" alt="image" src="https://github.com/user-attachments/assets/885585f8-2dfe-4f49-8562-67863df7feb2" />
+
 
 ## Features
 
