@@ -1,5 +1,6 @@
 import pygame
 import os
+import sys
 import random
 import glob
 import threading
@@ -25,6 +26,19 @@ class SoundManager:
     def get_available_packs(self):
         """Returns a list of available sound packs in the sounds directory."""
         sounds_dir = os.path.join(os.path.dirname(__file__), 'sounds')
+    def get_resource_path(self, relative_path):
+        """Get absolute path to resource, works for dev and for PyInstaller"""
+        try:
+            # PyInstaller creates a temp folder and stores path in _MEIPASS
+            base_path = sys._MEIPASS
+        except Exception:
+            base_path = os.path.dirname(os.path.abspath(__file__))
+
+        return os.path.join(base_path, relative_path)
+
+    def get_available_packs(self):
+        """Returns a list of available sound packs in the sounds directory."""
+        sounds_dir = self.get_resource_path('sounds')
         if not os.path.exists(sounds_dir):
             return []
         try:
@@ -58,7 +72,9 @@ class SoundManager:
         # but to be safe, we can assume this is internal. 
         # Ideally, we allow re-entrant lock.
         
-        base_path = os.path.join(os.path.dirname(__file__), 'sounds', self.pack_name)
+        
+        base_path = self.get_resource_path(os.path.join('sounds', self.pack_name))
+        
         
         load_errors = []
 
