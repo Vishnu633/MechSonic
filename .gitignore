@@ -14,3 +14,6 @@ dist/
 .idea/
 .vscode/
 *.log
+
+# Scripts to ignore
+build_dmg.py
