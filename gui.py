@@ -4,6 +4,9 @@ import sys
 import os
 import shutil
 import time
+import subprocess
+import ctypes
+import ctypes.util
 from tkinter import filedialog
 from pynput import keyboard
 from sound_manager import SoundManager
@@ -56,7 +59,71 @@ class KeyboardApp(ctk.CTk):
         
         # Start persistent listener
         self.start_persistent_listener()
+            
         self.update_ui_state()
+
+    def check_permissions(self):
+        try:
+            # Load ApplicationServices framework
+            as_lib = ctypes.cdll.LoadLibrary(
+                '/System/Library/Frameworks/ApplicationServices.framework/ApplicationServices')
+            
+            # AXIsProcessTrusted returns Boolean (true if trusted)
+            is_trusted = as_lib.AXIsProcessTrusted()
+            
+            if not is_trusted:
+                self.show_permission_alert()
+                
+        except Exception as e:
+            print(f"Error checking permissions: {e}")
+
+    def show_permission_alert(self):
+        # Create a Toplevel window for the alert
+        alert = ctk.CTkToplevel(self)
+        alert.title("Permissions Required")
+        alert.geometry("400x300")
+        alert.resizable(False, False)
+        alert.attributes("-topmost", True)
+        
+        # Center on parent
+        x = self.winfo_x() + (self.winfo_width() // 2) - 200
+        y = self.winfo_y() + (self.winfo_height() // 2) - 150
+        alert.geometry(f"+{x}+{y}")
+        
+        # UI Elements
+        ctk.CTkLabel(alert, text="⚠️ Action Required", font=("Roboto", 20, "bold"), text_color="#FF5555").pack(pady=(20, 10))
+        
+        msg = ("KeyboardClicks needs Accessibility permissions\nto detect your keystrokes.\n\n"
+               "1. Click 'Open Settings' below.\n"
+               "2. Toggle 'KeyboardClicks' to ON.\n"
+               "3. Restart this app.")
+               
+        ctk.CTkLabel(alert, text=msg, font=("Roboto", 14), justify="left").pack(pady=10, padx=20)
+        
+        ctk.CTkButton(
+            alert, 
+            text="Open Settings", 
+            command=self.open_accessibility_settings,
+            fg_color="#333333", 
+            hover_color="#444444"
+        ).pack(pady=10)
+        
+        ctk.CTkButton(
+            alert, 
+            text="I've Done It (Restart App)", 
+            command=self.restart_app,
+            fg_color=self.color_active,
+            text_color="black",
+            hover_color=self.color_active_hover
+        ).pack(pady=10)
+
+    def open_accessibility_settings(self):
+        subprocess.run(["open", "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility"])
+
+    def restart_app(self):
+        # Simple restart: close and let user reopen, or try to execv
+        # For a bundled app, execv is tricky. Best to just close.
+        self.on_closing()
 
     def create_widgets(self):
         # Header Section
