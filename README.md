@@ -12,7 +12,6 @@ A high-fidelity mechanical keyboard sound simulator with a modern, monochrome ae
 -   **Monochrome Theme**: Distraction-free, luxurious dark mode interface.
 -   **Visualizer**: Real-time input signal visualizer.
 -   **Sound Profiles**: Includes 13+ switch types (Cherry MX, Topre, Alps, etc.).
--   **Customizable**: Import your own sound packs easily.
 -   **Cross-Platform**: Runs on macOS, Windows, and Linux.
 
 ## Installation
