@@ -17,3 +17,6 @@ dist/
 
 # Scripts to ignore
 build_dmg.py
+
+# Binaries
+*.dmg
