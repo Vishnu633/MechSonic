@@ -17,32 +17,83 @@ A high-fidelity mechanical keyboard sound simulator with a modern, monochrome ae
 ## Installation
 
 ### Prerequisites
+
 -   Python 3.10 or higher.
 
 ### Steps
 
-1.  **Clone the repository**:
-    ```bash
-    git clone https://github.com/Vishnu633/MechSonic.git
-    cd mechsonic
-    ```
+**Clone the repository**:
 
-2.  **Install dependencies**:
-    ```bash
-    pip install -r requirements.txt
-    ```
+```bash
+git clone https://github.com/Vishnu633/MechSonic.git
+cd MechSonic
+```
 
 ## Usage
 
-### macOS / Linux
+### macOS / Linux (Recommended)
+
 Run the included shell script:
+
 ```bash
 ./run.sh
 ```
+
+The script will:
+
+-   Activate the `.venv` virtual environment (if available)
+-   Run `main.py`
+
+If `.venv` does not exist, create it first:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+Then run:
+
+```bash
+./run.sh
+```
+
 *Note: On macOS, you may need to grant "Accessibility" permissions to your terminal or the Python application to monitor global keystrokes.*
 
-### Windows
-Run directly with Python:
+### Manual Setup (Without run.sh)
+
+**Create a virtual environment (optional but recommended):**
+
+**macOS / Linux**
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+**Windows**
+
+```bash
+python -m venv .venv
+.venv\Scripts\activate
+```
+
+**Install dependencies:**
+
+```bash
+pip install -r requirements.txt
+```
+
+**Run the application:**
+
+**macOS / Linux**
+
+```bash
+python3 main.py
+```
+
+**Windows**
+
 ```bash
 python main.py
 ```
