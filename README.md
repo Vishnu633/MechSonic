@@ -47,11 +47,3 @@ Run directly with Python:
 ```bash
 python main.py
 ```
-
-## Adding Custom Sounds
-1.  Click the **"+ IMPORT SOUND PACK"** button in the app.
-2.  Select a folder containing your sound files.
-3.  The folder should contain `press/` and `release/` subdirectories, or files named like `press_*.wav`.
-
-## License
-MIT License. See `LICENSE` for details.
